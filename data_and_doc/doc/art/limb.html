@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module limb</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>limb</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/users/schrei_f/src/py4CAtS/art/limb.py">/users/schrei_f/src/py4CAtS/art/limb.py</a></font></td></tr></table>
+    <p><tt>od2limb<br>
+&nbsp;<br>
+vertical&nbsp;optical&nbsp;depth&nbsp;to&nbsp;effective&nbsp;height<br>
+&nbsp;<br>
+usage:<br>
+od2limb&nbsp;&nbsp;&nbsp;[options]&nbsp;&nbsp;opticalDepthFile<br>
+&nbsp;<br>
+-h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;help<br>
+-c&nbsp;&nbsp;&nbsp;&nbsp;char&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;comment&nbsp;character(s)&nbsp;used&nbsp;in&nbsp;input,output&nbsp;file&nbsp;(default&nbsp;'#')<br>
+-o&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;&nbsp;&nbsp;&nbsp;output&nbsp;file&nbsp;for&nbsp;saving&nbsp;of&nbsp;radiances&nbsp;(if&nbsp;not&nbsp;given:&nbsp;write&nbsp;to&nbsp;StdOut)<br>
+&nbsp;<br>
+-C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;flag&nbsp;indicating&nbsp;that&nbsp;input&nbsp;optical&nbsp;depth&nbsp;is&nbsp;cumulative&nbsp;(default:&nbsp;difference/delta/layer&nbsp;od)<br>
+-R&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;planetary&nbsp;radius&nbsp;(default&nbsp;Earth&nbsp;6371.23e5cm)<br>
+-s&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;flag:&nbsp;include&nbsp;surface&nbsp;limb&nbsp;path&nbsp;(i.e.&nbsp;zero&nbsp;tangent&nbsp;point&nbsp;altitude)&nbsp;with&nbsp;zero&nbsp;transmission<br>
+-v&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;flag:&nbsp;verbose<br>
+-x&nbsp;&nbsp;&nbsp;Interval&nbsp;&nbsp;&nbsp;lower,upper&nbsp;wavenumbers&nbsp;(comma&nbsp;separated&nbsp;pair&nbsp;of&nbsp;floats&nbsp;[no&nbsp;blanks!],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;default&nbsp;set&nbsp;according&nbsp;to&nbsp;range&nbsp;of&nbsp;optical&nbsp;depth&nbsp;in&nbsp;datafiles)<br>
+&nbsp;<br>
+WARNING:<br>
+od2limb&nbsp;&nbsp;does&nbsp;not&nbsp;know&nbsp;the&nbsp;type&nbsp;of&nbsp;optical&nbsp;depth&nbsp;(delta&nbsp;or&nbsp;accumulated&nbsp;...)&nbsp;given&nbsp;in&nbsp;the&nbsp;input&nbsp;file!<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;===&gt;&nbsp;use&nbsp;the&nbsp;-C&nbsp;flag&nbsp;if&nbsp;you&nbsp;have&nbsp;(ac)cumulated&nbsp;optical&nbsp;depth</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="https://numpy.org/doc/stable/">numpy</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-dod2eh"><strong>dod2eh</strong></a>(dodList, rEarth=637123000.0, surface=False, ehOnly=True, kilometer=False, srf=None, hwhm=1.0)</dt><dd><tt>Given&nbsp;vertical&nbsp;optical&nbsp;depths,&nbsp;compute&nbsp;effective&nbsp;height&nbsp;spectrum.<br>
+&nbsp;<br>
+&nbsp;ARGUMENTS:<br>
+&nbsp;----------<br>
+&nbsp;<br>
+&nbsp;dodList:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delta&nbsp;(layer)&nbsp;vertical&nbsp;optical&nbsp;depths&nbsp;(a&nbsp;list&nbsp;of&nbsp;odArray's)<br>
+&nbsp;rEarth:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;radius&nbsp;of&nbsp;Earth&nbsp;(default&nbsp;6371.23e5cm)&nbsp;or&nbsp;planet<br>
+&nbsp;surface:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;flag&nbsp;(default&nbsp;False):&nbsp;&nbsp;add&nbsp;limb&nbsp;path&nbsp;with&nbsp;zero&nbsp;transmission&nbsp;hitting&nbsp;surface<br>
+&nbsp;ehOnly:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;flag&nbsp;(default&nbsp;True): return only effective height (if False: wavenumber grid and effective height)<br>
+&nbsp;kilometer:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;flag&nbsp;(default&nbsp;False):&nbsp;&nbsp;return&nbsp;effective&nbsp;height&nbsp;in&nbsp;km&nbsp;(instead&nbsp;of&nbsp;cm)<br>
+&nbsp;srf:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;spectral&nbsp;response&nbsp;function,&nbsp;default&nbsp;None,&nbsp;choices:&nbsp;B[ox],&nbsp;T[riangle],&nbsp;G[auss]<br>
+&nbsp;hwhm:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;half&nbsp;width&nbsp;(at&nbsp;half&nbsp;maximum)&nbsp;of&nbsp;srf<br>
+&nbsp;<br>
+&nbsp;RETURNS:<br>
+&nbsp;--------<br>
+[vGrid:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;optional,&nbsp;only&nbsp;when&nbsp;`wavenumbers'&nbsp;flag&nbsp;is&nbsp;set]<br>
+&nbsp;effHgt:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;numpy&nbsp;array&nbsp;of&nbsp;effective&nbsp;heights</tt></dd></dl>
+ <dl><dt><a name="-dod2limb"><strong>dod2limb</strong></a>(dodList, zTangent=None, rEarth=637123000.0)</dt><dd><tt>Given&nbsp;vertical&nbsp;optical&nbsp;depths,&nbsp;compute&nbsp;limb&nbsp;optical&nbsp;depth.<br>
+&nbsp;<br>
+ARGUMENTS:<br>
+----------<br>
+&nbsp;<br>
+dodList:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delta&nbsp;(layer)&nbsp;optical&nbsp;depths&nbsp;(a&nbsp;list&nbsp;of&nbsp;odArray's)<br>
+zTangent:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tangent&nbsp;altitude<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default:&nbsp;None&nbsp;===&gt;&nbsp;compute&nbsp;od&nbsp;for&nbsp;all&nbsp;tangent&nbsp;points&nbsp;=&nbsp;levels<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NOTE:&nbsp;&nbsp;values&nbsp;&lt;=200&nbsp;are&nbsp;interpreted&nbsp;as&nbsp;kilometer<br>
+rEarth:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;radius&nbsp;[cm]&nbsp;of&nbsp;Earth&nbsp;(default&nbsp;6371.23e5cm)&nbsp;or&nbsp;planet<br>
+&nbsp;<br>
+RETURNS:<br>
+--------<br>
+odArray:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;subclassed&nbsp;numpy&nbsp;array&nbsp;with&nbsp;optical&nbsp;depth&nbsp;along&nbsp;with&nbsp;some&nbsp;attributes<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;a&nbsp;list&nbsp;of&nbsp;odArrays&nbsp;(for&nbsp;a&nbsp;list&nbsp;of&nbsp;tangents)<br>
+&nbsp;<br>
+NOTE:<br>
+-----<br>
+*&nbsp;dod2limb&nbsp;assumes&nbsp;a&nbsp;symmetric&nbsp;path&nbsp;space-tangent-space<br>
+*&nbsp;tangent&nbsp;points&nbsp;inside&nbsp;layers,&nbsp;i.e.&nbsp;different&nbsp;from&nbsp;levels,&nbsp;not&nbsp;supported&nbsp;(no&nbsp;interpolation&nbsp;etc.)</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>radiusEarth</strong> = 637123000.0</td></tr></table>
+</body></html>

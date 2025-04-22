@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module rayleigh</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>rayleigh</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/users/schrei_f/src/py4CAtS/art/rayleigh.py">/users/schrei_f/src/py4CAtS/art/rayleigh.py</a></font></td></tr></table>
+    <p><tt>Rayleigh&nbsp;cross&nbsp;section,&nbsp;absorption&nbsp;coefficient,&nbsp;and&nbsp;optical&nbsp;depth.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-CO2_crossSection"><strong>CO2_crossSection</strong></a>(vGrid)</dt><dd><tt>Rayleigh&nbsp;scattering&nbsp;cross&nbsp;sections&nbsp;for&nbsp;a&nbsp;CO2&nbsp;atmosphere.<br>
+&nbsp;<br>
+E.&nbsp;Marcq&nbsp;et&nbsp;al.&nbsp;(Icarus,&nbsp;2011,&nbsp;doi&nbsp;10.1016/j.icarus.2010.08.021)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xs_CO2&nbsp;[cm2]&nbsp;=&nbsp;12.4e-27&nbsp;*&nbsp;(532.24/lambda[nm])**4</tt></dd></dl>
+ <dl><dt><a name="-H2_crossSection"><strong>H2_crossSection</strong></a>(vGrid)</dt><dd><tt>Rayleigh&nbsp;scattering&nbsp;cross&nbsp;sections&nbsp;for&nbsp;a&nbsp;H2&nbsp;atmosphere.<br>
+&nbsp;<br>
+Sara&nbsp;Seager:&nbsp;Exoplanet&nbsp;Atmospheres&nbsp;-&nbsp;Physical&nbsp;Processes,&nbsp;Section&nbsp;8.4,&nbsp;Eq.&nbsp;(8.64)&nbsp;&nbsp;(Princeton&nbsp;University&nbsp;Press,&nbsp;2010)<br>
+Dalgarno&amp;Williams:&nbsp;Rayleigh&nbsp;Scattering&nbsp;by&nbsp;Molecular&nbsp;Hydrogen&nbsp;(Astrophys.&nbsp;J.,&nbsp;136,&nbsp;690-692,&nbsp;1962)<br>
+see&nbsp;also&nbsp;A.&nbsp;Caldas&nbsp;et&nbsp;al.&nbsp;A&amp;A&nbsp;2019&nbsp;or&nbsp;<a href="http://de.arxiv.org/abs/1901.09932">http://de.arxiv.org/abs/1901.09932</a>,&nbsp;&nbsp;appendix&nbsp;D<br>
+see&nbsp;also&nbsp;K.&nbsp;Heng,&nbsp;A&nbsp;cloudiness&nbsp;index&nbsp;for&nbsp;transiting&nbsp;exoplanets&nbsp;....,&nbsp;APJL,&nbsp;826:L16&nbsp;(6pp),&nbsp;2016&nbsp;July&nbsp;20<br>
+see&nbsp;also&nbsp;P.&nbsp;Cubillos:&nbsp;PyRatBay,&nbsp;arxiv&nbsp;2105.05598&nbsp;--&gt;&nbsp;MNRAS</tt></dd></dl>
+ <dl><dt><a name="-bodhaine_crossSection"><strong>bodhaine_crossSection</strong></a>(vGrid)</dt><dd><tt>Rayleigh&nbsp;scattering&nbsp;cross&nbsp;sections.<br>
+Empirical&nbsp;fit&nbsp;by&nbsp;Bodhaine&nbsp;et&nbsp;al.,&nbsp;JAOT,&nbsp;16(11),&nbsp;pp.&nbsp;1854-1861,&nbsp;1999<br>
+Implementation&nbsp;Eq.&nbsp;(2)&nbsp;of&nbsp;Yan&nbsp;et&nbsp;al.,&nbsp;Int.&nbsp;J.&nbsp;Astrobiology,&nbsp;14(2),&nbsp;pp.&nbsp;255-266,&nbsp;2015</tt></dd></dl>
+ <dl><dt><a name="-bucholtz_crossSection"><strong>bucholtz_crossSection</strong></a>(vGrid)</dt><dd><tt>Rayleigh&nbsp;scattering&nbsp;cross&nbsp;sections.<br>
+Empirical&nbsp;fit&nbsp;by&nbsp;A.&nbsp;Bucholtz&nbsp;(Appl.Opt.&nbsp;34(15),&nbsp;pp.2765-2773,&nbsp;1995,&nbsp;Eq.&nbsp;(8)<br>
+!!!&nbsp;longwave&nbsp;approximation&nbsp;only&nbsp;for&nbsp;nu&lt;20000cm-1&nbsp;or&nbsp;lambda&gt;0.5mue</tt></dd></dl>
+ <dl><dt><a name="-nicolet_crossSection"><strong>nicolet_crossSection</strong></a>(vGrid)</dt><dd><tt>Rayleigh&nbsp;scattering&nbsp;cross&nbsp;sections.<br>
+Empirical&nbsp;fit&nbsp;by&nbsp;M.&nbsp;Nicolet,&nbsp;PSS&nbsp;32,&nbsp;1467-1468&nbsp;(1984)<br>
+!!!&nbsp;longwave&nbsp;approximation&nbsp;only&nbsp;for&nbsp;nu&lt;18181cm-1&nbsp;or&nbsp;lambda&gt;0.55mue</tt></dd></dl>
+ <dl><dt><a name="-rayleigh"><strong>rayleigh</strong></a>(data, factor=1.0, model='nicolet')</dt><dd><tt>Compute&nbsp;Rayleigh&nbsp;molecular&nbsp;cross&nbsp;section&nbsp;and&nbsp;add&nbsp;extinction&nbsp;to&nbsp;optical&nbsp;depth(s)&nbsp;or&nbsp;absorption&nbsp;coefficient(s).<br>
+&nbsp;<br>
+If&nbsp;a&nbsp;list&nbsp;of&nbsp;ac&nbsp;or&nbsp;od&nbsp;is&nbsp;given,&nbsp;add&nbsp;Rayleigh&nbsp;individually&nbsp;and&nbsp;return&nbsp;the&nbsp;corresponding&nbsp;list.<br>
+Optionally&nbsp;the&nbsp;extinction&nbsp;can&nbsp;be&nbsp;scaled&nbsp;by&nbsp;a&nbsp;"Rayleigh&nbsp;enhancement&nbsp;factor"&nbsp;(default&nbsp;1.0).</tt></dd></dl>
+ <dl><dt><a name="-totalAirOpticalDepth"><strong>totalAirOpticalDepth</strong></a>(vGrid)</dt><dd><tt>Earth&nbsp;atmosphere&nbsp;total&nbsp;optical&nbsp;depth.<br>
+Zdunkowski,&nbsp;Trautmann,&nbsp;Bott:&nbsp;&nbsp;Radiation&nbsp;in&nbsp;the&nbsp;atmosphere&nbsp;(Cambridge&nbsp;2007):&nbsp;Eq.&nbsp;(11.12).</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>__all__</strong> = ['bodhaine_crossSection', 'bucholtz_crossSection', 'nicolet_crossSection', 'CO2_crossSection', 'H2_crossSection', 'totalAirOpticalDepth', 'rayleigh']</td></tr></table>
+</body></html>

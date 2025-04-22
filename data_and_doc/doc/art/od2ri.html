@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module od2ri</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>od2ri</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/users/schrei_f/src/py4CAtS/art/od2ri.py">/users/schrei_f/src/py4CAtS/art/od2ri.py</a></font></td></tr></table>
+    <p><tt>od2ri<br>
+&nbsp;(absorption)&nbsp;optical&nbsp;depth&nbsp;to&nbsp;radiation&nbsp;intensity&nbsp;---&nbsp;Schwarzschild&nbsp;solver<br>
+&nbsp;<br>
+&nbsp;usage:<br>
+&nbsp;od2ri&nbsp;&nbsp;&nbsp;[options]&nbsp;&nbsp;opticalDepthFile<br>
+&nbsp;<br>
+&nbsp;-h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;help<br>
+&nbsp;-c&nbsp;&nbsp;&nbsp;&nbsp;char&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;comment&nbsp;character(s)&nbsp;used&nbsp;in&nbsp;input,output&nbsp;file&nbsp;(default&nbsp;'#')<br>
+&nbsp;-o&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;&nbsp;&nbsp;&nbsp;output&nbsp;file&nbsp;for&nbsp;saving&nbsp;of&nbsp;radiances&nbsp;(if&nbsp;not&nbsp;given:&nbsp;write&nbsp;to&nbsp;StdOut)<br>
+&nbsp;<br>
+--BoA&nbsp;&nbsp;float&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bottom-of-atmosphere&nbsp;altitude&nbsp;[km]&nbsp;&nbsp;(read&nbsp;opt.depth&nbsp;only&nbsp;for&nbsp;levels&nbsp;above)<br>
+--ToA&nbsp;&nbsp;float&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;top-of-atmosphere&nbsp;altitude&nbsp;[km]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(read&nbsp;opt.depth&nbsp;only&nbsp;for&nbsp;levels&nbsp;below)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NOTE:&nbsp;&nbsp;no&nbsp;interpolation,&nbsp;i.e.&nbsp;integration&nbsp;starts/stops&nbsp;at&nbsp;the&nbsp;next&nbsp;level&nbsp;above/below&nbsp;BoA/ToA<br>
+&nbsp;-C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;flag&nbsp;indicating&nbsp;that&nbsp;input&nbsp;optical&nbsp;depth&nbsp;is&nbsp;cumulative&nbsp;(default:&nbsp;difference/delta&nbsp;od)<br>
+&nbsp;-q&nbsp;&nbsp;&nbsp;char&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;quadrature&nbsp;method:&nbsp;&nbsp;trapezoid&nbsp;with&nbsp;default&nbsp;'T'&nbsp;for&nbsp;"B&nbsp;linear&nbsp;in&nbsp;tau"&nbsp;or&nbsp;'E'&nbsp;for&nbsp;"B&nbsp;exponential&nbsp;in&nbsp;tau"<br>
+&nbsp;-g&nbsp;&nbsp;&nbsp;float&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ground&nbsp;/&nbsp;surface&nbsp;altitude&nbsp;[km]&nbsp;&nbsp;(default&nbsp;0.0)<br>
+&nbsp;-T&nbsp;&nbsp;&nbsp;float&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;surface&nbsp;temperature&nbsp;[K]&nbsp;&nbsp;(default&nbsp;0)<br>
+&nbsp;-v&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;flag:&nbsp;verbose<br>
+&nbsp;-x&nbsp;&nbsp;&nbsp;Interval&nbsp;&nbsp;&nbsp;lower,upper&nbsp;wavenumbers&nbsp;(comma&nbsp;separated&nbsp;pair&nbsp;of&nbsp;floats&nbsp;[no&nbsp;blanks!],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;default&nbsp;set&nbsp;according&nbsp;to&nbsp;range&nbsp;of&nbsp;optical&nbsp;depth&nbsp;in&nbsp;datafiles)<br>
+&nbsp;-S&nbsp;&nbsp;&nbsp;float&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sun&nbsp;zenith&nbsp;angle,&nbsp;SZA&nbsp;(sun&nbsp;at&nbsp;zenith:&nbsp;0dg,&nbsp;sun&nbsp;at&nbsp;horizon:&nbsp;90dg)<br>
+&nbsp;-z&nbsp;&nbsp;&nbsp;float&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;observer&nbsp;zenith&nbsp;angle&nbsp;(uplooking:&nbsp;0dg,&nbsp;downlooking&nbsp;180dg)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NOTE:&nbsp;&nbsp;a&nbsp;horizontal&nbsp;view,&nbsp;i.e.&nbsp;angle=90dg,&nbsp;is&nbsp;not&nbsp;implemented!!!<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;WARNING:<br>
+&nbsp;od2ri&nbsp;&nbsp;does&nbsp;not&nbsp;know&nbsp;the&nbsp;type&nbsp;of&nbsp;optical&nbsp;depth&nbsp;(delta&nbsp;or&nbsp;accumulated&nbsp;...)&nbsp;given&nbsp;in&nbsp;the&nbsp;input&nbsp;file!<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;===&gt;&nbsp;use&nbsp;the&nbsp;-C&nbsp;flag&nbsp;if&nbsp;you&nbsp;have&nbsp;(ac)cumulated&nbsp;optical&nbsp;depth</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="https://numpy.org/doc/stable/">numpy</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-dod2ri"><strong>dod2ri</strong></a>(dodList, obsAngle=0.0, tSurface=None, rSurface=0.0, zSurface=None, sunAngle=0.0, space=None, omega=None, mode=None, verbose=False)</dt><dd><tt>Evaluate&nbsp;Schwarzschild&nbsp;or&nbsp;Beer&nbsp;integral&nbsp;equation(s),&nbsp;optionally&nbsp;add&nbsp;surface&nbsp;or&nbsp;space&nbsp;radiation&nbsp;and&nbsp;return&nbsp;radiance.<br>
+&nbsp;<br>
+ARGUMENTS:<br>
+----------<br>
+&nbsp;<br>
+dodList:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delta&nbsp;(layer)&nbsp;optical&nbsp;depths&nbsp;(a&nbsp;list&nbsp;of&nbsp;odArray's)<br>
+obsAngle:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;observer&nbsp;viewing&nbsp;zenith&nbsp;angle:&nbsp;0dg=uplooking&nbsp;(default)&nbsp;...&nbsp;180dg=downloooking/nadir<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NOTE:&nbsp;&nbsp;a&nbsp;horizontal&nbsp;view&nbsp;with&nbsp;90dg&nbsp;is&nbsp;not&nbsp;implemented!!!<br>
+tSurface:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;surface&nbsp;temperature&nbsp;[K],&nbsp;default&nbsp;None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;===&gt;&nbsp;Schwarzschild&nbsp;mode:&nbsp;no&nbsp;background&nbsp;contribution,&nbsp;only&nbsp;atmosppheric&nbsp;thermal&nbsp;emission<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Beer&nbsp;mode:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;use&nbsp;BoA&nbsp;temperature<br>
+rSurface:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;surface&nbsp;reflectivity,&nbsp;equivalent&nbsp;to&nbsp;one-emissivity:&nbsp;&nbsp;R=1-E;&nbsp;default&nbsp;0.0&nbsp;(i.e.&nbsp;full&nbsp;emissivity)<br>
+zSurface:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ground/bottom&nbsp;altitude&nbsp;(default&nbsp;None,&nbsp;i.e.&nbsp;use&nbsp;BoA&nbsp;altitude)<br>
+sunAngle:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;solar&nbsp;zenith&nbsp;angle:&nbsp;0dg=zenith&nbsp;(default)&nbsp;...&nbsp;90dg=horizon<br>
+space:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;temperature&nbsp;[K]&nbsp;or&nbsp;irradiance&nbsp;spectrum,&nbsp;default&nbsp;None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;positive&nbsp;floats:&nbsp;&nbsp;simply&nbsp;assume&nbsp;I_space&nbsp;=&nbsp;Planck&nbsp;(v,space)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;negative&nbsp;float&nbsp;(approx&nbsp;-6000):&nbsp;&nbsp;convert&nbsp;to&nbsp;irradiance&nbsp;as<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I_space&nbsp;=&nbsp;pi*(sunRadius/sun2earth)**2*planck(v,-space)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;file(name):&nbsp;&nbsp;read&nbsp;extraterrestrial&nbsp;irradiance&nbsp;spectrum&nbsp;from&nbsp;file&nbsp;(e.g.&nbsp;Kurusz)<br>
+omega&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;single&nbsp;scattering&nbsp;albedo&nbsp;(default&nbsp;None)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;0&lt;=omega&lt;=1&nbsp;automatically&nbsp;select&nbsp;mode&nbsp;Schwarzschild&nbsp;with&nbsp;B&nbsp;exponential&nbsp;in&nbsp;opt.depth<br>
+mode:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Schwarzschild&nbsp;|&nbsp;Beer&nbsp;|&nbsp;...<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;default&nbsp;None,&nbsp;i.e.&nbsp;choose&nbsp;automatically<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Schwarzschild&nbsp;for&nbsp;v&lt;=3000cm-1&nbsp;&nbsp;&nbsp;(lambda&gt;=3.33mue)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Beer&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v&gt;&nbsp;3000cm-1&nbsp;&nbsp;&nbsp;(lambda&lt;&nbsp;3.33mue)<br>
+&nbsp;<br>
+RETURNS:<br>
+--------<br>
+riArray:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;subclassed&nbsp;numpy&nbsp;array&nbsp;with&nbsp;radiance&nbsp;along&nbsp;with&nbsp;some&nbsp;attributes<br>
+&nbsp;<br>
+NOTE:&nbsp;???&nbsp;outdated&nbsp;???<br>
+-----<br>
+dod2ri&nbsp;&nbsp;evaluates&nbsp;the&nbsp;Schwarzschild&nbsp;(and&nbsp;Beer)&nbsp;integral&nbsp;from&nbsp;the&nbsp;first&nbsp;to&nbsp;the&nbsp;last&nbsp;altitude,<br>
+i.e.&nbsp;lowest&nbsp;to&nbsp;highest&nbsp;for&nbsp;an&nbsp;uplooking&nbsp;observer&nbsp;(zenith&lt;90dg)&nbsp;and&nbsp;highest&nbsp;to&nbsp;lowest&nbsp;for&nbsp;nadir&nbsp;view.<br>
+If&nbsp;you&nbsp;want&nbsp;radiance&nbsp;for&nbsp;an&nbsp;observer&nbsp;somewhere&nbsp;in&nbsp;between,&nbsp;give&nbsp;only&nbsp;the&nbsp;subset&nbsp;of&nbsp;relevant&nbsp;odArray's.<br>
+However,&nbsp;dod2ri&nbsp;does&nbsp;not&nbsp;consider&nbsp;an&nbsp;observer&nbsp;between&nbsp;the&nbsp;levels&nbsp;(layer&nbsp;bounds).</tt></dd></dl>
+ <dl><dt><a name="-ln"><strong>ln</strong></a> = log(...)</dt><dd><tt>log(x[,&nbsp;base])<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;logarithm&nbsp;of&nbsp;x&nbsp;to&nbsp;the&nbsp;given&nbsp;base.<br>
+If&nbsp;the&nbsp;base&nbsp;not&nbsp;specified,&nbsp;returns&nbsp;the&nbsp;natural&nbsp;logarithm&nbsp;(base&nbsp;e)&nbsp;of&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-oDepth_subLayer"><strong>oDepth_subLayer</strong></a>(dodList, zSurface)</dt><dd><tt>'Interpolate'&nbsp;bottom&nbsp;layer&nbsp;optical&nbsp;depth&nbsp;and&nbsp;return&nbsp;a&nbsp;(true)&nbsp;copy&nbsp;of&nbsp;the&nbsp;opt&nbsp;depth&nbsp;list.</tt></dd></dl>
+ <dl><dt><a name="-unpack_oDepths"><strong>unpack_oDepths</strong></a>(dodList, zSurface=None)</dt><dd><tt>Unpack&nbsp;opt.&nbsp;depth&nbsp;list,&nbsp;evtl.&nbsp;skip&nbsp;bottom&nbsp;layer(s)&nbsp;and&nbsp;'interpolate'&nbsp;lowest&nbsp;layer.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>earth2sun</strong> = 14959787070000<br>
+<strong>lengthUnits</strong> = {'A': 1e-08, 'au': 14959787070000, 'cm': 1.0, 'dm': 10.0, 'inch': 2.54, 'km': 100000.0, 'ly': 946073047258080000, 'm': 100.0, 'micrometer': 0.0001, 'mm': 0.1, ...}<br>
+<strong>pi</strong> = 3.141592653589793<br>
+<strong>radiusSun</strong> = 69570000000.0<br>
+<strong>recPi</strong> = 0.3183098861837907</td></tr></table>
+</body></html>

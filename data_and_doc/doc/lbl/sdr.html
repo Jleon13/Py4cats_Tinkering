@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module sdr</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>sdr</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/users/schrei_f/src/py4CAtS/lbl/sdr.py">/users/schrei_f/src/py4CAtS/lbl/sdr.py</a></font></td></tr></table>
+    <p><tt>Speed&nbsp;dependent&nbsp;Voigt&nbsp;(SDV)&nbsp;and&nbsp;Rautian&nbsp;(SDR)&nbsp;functions&nbsp;K(x,y,...)<br>
+&nbsp;<br>
+The&nbsp;generalizations&nbsp;of&nbsp;the&nbsp;Voigt&nbsp;function&nbsp;K(x,y)&nbsp;with&nbsp;one&nbsp;and/or&nbsp;two&nbsp;additional&nbsp;arguments&nbsp;q&nbsp;and/or&nbsp;r.<br>
+&nbsp;<br>
+ARGUMENTS:<br>
+x&nbsp;=&nbsp;sqrtLn2*(vGrid-vLine)/gammaG&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(vGrid&nbsp;=&nbsp;wavenumber&nbsp;(grid);&nbsp;&nbsp;&nbsp;vLine&nbsp;=&nbsp;actual&nbsp;line&nbsp;position&nbsp;(incl.&nbsp;shift))<br>
+y&nbsp;=&nbsp;sqrtLn2*gammaL/gammaG&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(gammaL&nbsp;=&nbsp;gamma0&nbsp;speed&nbsp;averaged&nbsp;broadening&nbsp;at&nbsp;actual&nbsp;p,T)<br>
+q&nbsp;=&nbsp;sqrtLn2*gamma2/gammaG&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(gamma2&nbsp;=&nbsp;quadratic&nbsp;dependence&nbsp;of&nbsp;broadening&nbsp;parameter&nbsp;at&nbsp;p,T)<br>
+r&nbsp;=&nbsp;sqrtLn2*nu_vc/gammaG&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(frequency&nbsp;of&nbsp;velocity-changing&nbsp;collisions&nbsp;(Dicke&nbsp;narrowing)&nbsp;&nbsp;(=&nbsp;zeta&nbsp;in&nbsp;Varghese&amp;Hanson))<br>
+&nbsp;<br>
+&nbsp;<br>
+REFERENCES:<br>
+BWB&nbsp;=&nbsp;Boone,&nbsp;Walker,&nbsp;Bernath:<br>
+An&nbsp;efficient&nbsp;analytical&nbsp;approach&nbsp;for&nbsp;calculating&nbsp;line&nbsp;mixing&nbsp;in&nbsp;atmospheric&nbsp;remote&nbsp;sensing&nbsp;applications.<br>
+JQSRT&nbsp;112(6),&nbsp;pp.&nbsp;8=980-089,&nbsp;2011<br>
+&nbsp;<br>
+TNH&nbsp;=&nbsp;Tran,&nbsp;Ngo,&nbsp;Hartmann:&nbsp;Efficient&nbsp;computation&nbsp;of&nbsp;some&nbsp;speed-dependent&nbsp;isolated&nbsp;line&nbsp;profiles.<br>
+JQSRT&nbsp;129,&nbsp;pp.&nbsp;199–203,&nbsp;2013.&nbsp;(Erratum:&nbsp;JQSRT&nbsp;134,&nbsp;104&nbsp;(2014))<br>
+&nbsp;<br>
+FS:&nbsp;&nbsp;&nbsp;&nbsp;Computational&nbsp;aspects&nbsp;of&nbsp;speed-dependent&nbsp;Voigt&nbsp;profiles.&nbsp;JQSRT&nbsp;187,&nbsp;pp.&nbsp;44-53,&nbsp;2017<br>
+FS+PH:&nbsp;Computational&nbsp;aspects&nbsp;of&nbsp;speed-dependent&nbsp;Voigt&nbsp;and&nbsp;Rautian&nbsp;profiles.&nbsp;JQSRT&nbsp;258,&nbsp;107385,&nbsp;2021</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="https://numpy.org/doc/stable/">numpy</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-rautian"><strong>rautian</strong></a>(x, y, r=0.0, cerf=&lt;function zpf16p at 0x7f827f1db7b8&gt;)</dt><dd><tt>Evaluate&nbsp;Rautian&nbsp;function&nbsp;&nbsp;(ignoring&nbsp;pressure&nbsp;induced&nbsp;shift).<br>
+&nbsp;<br>
+The&nbsp;generalization&nbsp;of&nbsp;the&nbsp;Voigt&nbsp;function&nbsp;K(x,y)&nbsp;with&nbsp;one&nbsp;additional&nbsp;argument<br>
+&nbsp;x&nbsp;=&nbsp;sqrtLn2*(vGrid-vLine)/gammaD&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(vGrid&nbsp;=&nbsp;wavenumber&nbsp;(grid);&nbsp;&nbsp;&nbsp;vLine&nbsp;=&nbsp;actual&nbsp;line&nbsp;position&nbsp;(incl.&nbsp;shift))<br>
+&nbsp;y&nbsp;=&nbsp;sqrtLn2*gammaL/gammaD&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(gammaL&nbsp;=&nbsp;gamma0&nbsp;speed&nbsp;averaged&nbsp;broadening&nbsp;at&nbsp;actual&nbsp;p,T)<br>
+&nbsp;r&nbsp;=&nbsp;sqrtLn2*nu_vc/gammaD&nbsp;&nbsp;=&nbsp;zeta&nbsp;(Varghese&amp;Hanson)</tt></dd></dl>
+ <dl><dt><a name="-sdr"><strong>sdr</strong></a>(x, y, q=0.0, r=0.0, cerf=&lt;function zpf16p at 0x7f827f1db7b8&gt;)</dt><dd><tt>Evaluate&nbsp;speed-dependent&nbsp;Rautian&nbsp;function&nbsp;&nbsp;(ignoring&nbsp;pressure&nbsp;induced&nbsp;shift).<br>
+The&nbsp;generalization&nbsp;of&nbsp;the&nbsp;Voigt&nbsp;function&nbsp;K(x,y)&nbsp;with&nbsp;two&nbsp;additional&nbsp;arguments&nbsp;q&nbsp;and&nbsp;r.<br>
+&nbsp;<br>
+ARGUMENTS:<br>
+&nbsp;x&nbsp;=&nbsp;sqrtLn2*(vGrid-vLine)/gammaD&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(vGrid&nbsp;=&nbsp;wavenumber&nbsp;(grid);&nbsp;&nbsp;&nbsp;vLine&nbsp;=&nbsp;actual&nbsp;line&nbsp;position&nbsp;(incl.&nbsp;shift))<br>
+&nbsp;y&nbsp;=&nbsp;sqrtLn2*gammaL/gammaD&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(gammaL&nbsp;=&nbsp;gamma0&nbsp;speed&nbsp;averaged&nbsp;broadening&nbsp;at&nbsp;actual&nbsp;p,T)<br>
+&nbsp;q&nbsp;=&nbsp;sqrtLn2*gamma2/gammaD&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(gamma2&nbsp;=&nbsp;quadratic&nbsp;dependence&nbsp;of&nbsp;broadening&nbsp;parameter&nbsp;at&nbsp;p,T):w<br>
+&nbsp;r&nbsp;=&nbsp;sqrtLn2*nu_vc/gammaD&nbsp;&nbsp;=&nbsp;zeta&nbsp;(Varghese&amp;Hanson)<br>
+&nbsp;<br>
+RETURNS:<br>
+&nbsp;sdr&nbsp;=&nbsp;the&nbsp;complex&nbsp;"generalization"&nbsp;of&nbsp;the&nbsp;complex&nbsp;error&nbsp;function&nbsp;w<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;a&nbsp;'naive'&nbsp;version&nbsp;without&nbsp;check&nbsp;if&nbsp;the&nbsp;two&nbsp;arguments&nbsp;zPlus,&nbsp;zMinus&nbsp;are&nbsp;in&nbsp;the&nbsp;same&nbsp;region.<br>
+Complex&nbsp;arithmetic&nbsp;similar&nbsp;to&nbsp;TNH,&nbsp;but&nbsp;with&nbsp;cancellation-safe&nbsp;evaluation&nbsp;of&nbsp;the&nbsp;square&nbsp;root&nbsp;difference</tt></dd></dl>
+ <dl><dt><a name="-sdv"><strong>sdv</strong></a>(x, y, q=0.0, cerf=&lt;function zpf16p at 0x7f827f1db7b8&gt;)</dt><dd><tt>Evaluate&nbsp;speed-dependent&nbsp;Voigt&nbsp;function&nbsp;&nbsp;(ignoring&nbsp;pressure&nbsp;induced&nbsp;shift).<br>
+The&nbsp;generalization&nbsp;of&nbsp;the&nbsp;Voigt&nbsp;function&nbsp;K(x,y)&nbsp;with&nbsp;one&nbsp;additional&nbsp;arguments&nbsp;q.<br>
+&nbsp;<br>
+ARGUMENTS:<br>
+&nbsp;x&nbsp;=&nbsp;sqrtLn2*(vGrid-vLine)/gammaD&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(vGrid&nbsp;=&nbsp;wavenumber&nbsp;(grid);&nbsp;&nbsp;&nbsp;vLine&nbsp;=&nbsp;actual&nbsp;line&nbsp;position&nbsp;(incl.&nbsp;shift))<br>
+&nbsp;y&nbsp;=&nbsp;sqrtLn2*gammaL/gammaD&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(gammaL&nbsp;=&nbsp;gamma0&nbsp;speed&nbsp;averaged&nbsp;broadening&nbsp;at&nbsp;actual&nbsp;p,T)<br>
+&nbsp;q&nbsp;=&nbsp;sqrtLn2*gamma2/gammaD&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(gamma2&nbsp;=&nbsp;quadratic&nbsp;dependence&nbsp;of&nbsp;broadening&nbsp;parameter&nbsp;at&nbsp;p,T):w<br>
+&nbsp;<br>
+RETURNS:<br>
+&nbsp;sdv&nbsp;=&nbsp;the&nbsp;complex&nbsp;"generalization"&nbsp;of&nbsp;the&nbsp;complex&nbsp;error&nbsp;function&nbsp;w<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;a&nbsp;'naive'&nbsp;version&nbsp;without&nbsp;check&nbsp;if&nbsp;the&nbsp;two&nbsp;arguments&nbsp;zPlus,&nbsp;zMinus&nbsp;are&nbsp;in&nbsp;the&nbsp;same&nbsp;region.<br>
+Complex&nbsp;arithmetic&nbsp;similar&nbsp;to&nbsp;TNH,&nbsp;but&nbsp;with&nbsp;cancellation-safe&nbsp;evaluation&nbsp;of&nbsp;the&nbsp;square&nbsp;root&nbsp;difference</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>__all__</strong> = ['rautian', 'sdv', 'sdr']</td></tr></table>
+</body></html>
